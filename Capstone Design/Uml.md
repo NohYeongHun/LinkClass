@@ -138,3 +138,7 @@ OMG(Object Managment Group) 표준 모델링 언어<br>
 기술 지원 코드 생성 : Web Services, RESTful Services 등<br>
 구조 다이어그램에서 골격 코드 생성<br>
 행위 다이어그램에서 로직 코드 생성
+
+# UML -> 알고리즘
+1. 알고리즘 => 1. 순서도, 2. 슈도코드(의사코드)
+2. 테스트케이스, 문서화.
