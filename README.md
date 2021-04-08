@@ -38,4 +38,6 @@ category_name : 정치, 경제, 사회, 생활 문화, IT 과학, 세계, 오피
 - set_date_range (시작 년, 시작 월, 종료 년, 종료 월)
 이 방법은 수집하려고하는 뉴스의 기간을 의미합니다. 기본적으로 startmonth 월부터 endmonth 월까지 데이터를 수집합니다.
 [KoreaNewsCrawler]https://github.com/lumyjuwon/KoreaNewsCrawler
-# 빅데이터 분석
+# 중간고사
+- 코딩 시험 2021-04-22 10:00 학과 결정에 따라 변동사항 존재
+- 코드들을 책에 정리해서 가져와라
