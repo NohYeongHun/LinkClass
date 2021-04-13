@@ -235,6 +235,8 @@ print(train_target.shape, test_target.shape)
 - 즉 테스트 데이터 입력시 output의 정확도가 높은것을 의미함.
 
 
+# 거리구하기
+- (특성 - 평균) / 표준편차
 ## 파이썬의 함수 구분
 - 파괴함수
 - 비파괴함수
