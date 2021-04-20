@@ -216,3 +216,7 @@ public class BoardController {
 </project>
 
 ```
+
+# 실행 단축키
+1. F3 : Open Declaration
+2. F4 : Open Type Hierarchy
