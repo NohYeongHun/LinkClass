@@ -1,0 +1,141 @@
+#----------------
+out_data = pd.read_csv("out.csv")
+out_data.head()
+
+#----------------
+cust_data = pd.read_excel("cust.xlsx")
+cust_data.head()
+
+#----------------
+cust_data = pd.read_excel("cust.xlsx")
+cust_data.head()
+
+#----------------
+out_data["item_name"].head()
+
+#----------------
+out_data["item_price"].head()
+
+#----------------
+cust_data["등록일"].head()
+
+#----------------
+out_data["purchase_date"] = pd.to_datetime(out_data["purchase_date"])
+out_data["purchase_month"] = out_data["purchase_date"].dt.strftime("%Y%m")
+res = out_data.pivot_table(index="purchase_month", columns="item_name", aggfunc="size", fill_value=0)
+res
+
+#----------------
+res = out_data.pivot_table(index="purchase_month",
+                           columns="item_name",
+                           values="item_price",
+                           aggfunc="sum",
+                           fill_value=0)
+res
+
+#----------------
+print(len(pd.unique(out_data["item_name"])))
+
+#----------------
+out_data["item_name"] = out_data["item_name"].str.upper()
+out_data["item_name"] = out_data["item_name"].str.replace("　", "")
+out_data["item_name"] = out_data["item_name"].str.replace(" ", "")
+out_data.sort_values(by=["item_name"], ascending=True)
+
+#----------------
+print(len(pd.unique(out_data["item_name"])))
+print(pd.unique(out_data["item_name"]))
+
+#----------------
+out_data.isnull().any()
+
+#----------------
+flg_is_null = out_data["item_price"].isnull()
+flg_is_null
+
+#----------------
+for trg in list(out_data.loc[flg_is_null, "item_name"].unique()):
+    price = out_data.loc[(~flg_is_null) & (out_data["item_name"] == trg), "item_price"].max()
+    out_data["item_price"].loc[(flg_is_null) & (out_data["item_name"]==trg)] = price
+out_data.head()
+
+#----------------
+out_data.isnull().any()
+
+#----------------
+for trg in list(out_data["item_name"].sort_values().unique()):
+    print(trg + "의최고가：" + str(out_data.loc[out_data["item_name"]==trg]["item_price"].max()) 
+          + "의최저가：" + str(out_data.loc[out_data["item_name"]==trg]["item_price"].min(skipna=False)))
+
+#----------------
+cust_data["고객이름"].head()
+
+#----------------
+out_data["customer_name"].head()
+
+#----------------
+cust_data["고객이름"] = cust_data["고객이름"].str.replace("　", "")
+cust_data["고객이름"] = cust_data["고객이름"].str.replace(" ", "")
+cust_data["고객이름"].head()
+
+#----------------
+flg_is_serial = cust_data["등록일"].astype("str").str.isdigit()
+flg_is_serial.sum()
+
+#----------------
+fromSerial = pd.to_timedelta(cust_data.loc[flg_is_serial, "등록일"].astype("float")-2, unit="D") + pd.to_datetime("1900/01/01")
+fromSerial
+
+#----------------
+fromString = pd.to_datetime(cust_data.loc[~flg_is_serial, "등록일"])
+fromString
+
+#----------------
+cust_data["등록일"] = pd.concat([fromSerial, fromString])
+cust_data
+
+#----------------
+cust_data["등록연월"] = cust_data["등록일"].dt.strftime("%Y%m")
+rslt = cust_data.groupby("등록연월").count()["고객이름"]
+print(rslt)
+print(len(cust_data))
+
+#----------------
+flg_is_serial = cust_data["등록일"].astype("str").str.isdigit()
+flg_is_serial.sum()
+
+#----------------
+join_data = pd.merge(out_data,
+                     cust_data,
+                     left_on="customer_name",
+                     right_on="고객이름",
+                     how="left")
+join_data
+
+#----------------
+join_data = join_data.drop("customer_name", axis=1)
+join_data
+
+#----------------
+dump_data = join_data[["purchase_date", "purchase_month", "item_name", "item_price", "고객이름", "지역", "등록일"]]
+dump_data
+
+#----------------
+dump_data.to_csv("dump_data.csv", index=False)
+
+#----------------
+menu_list = pd.read_csv('menus.csv', encoding='cp949')
+
+#----------------
+meal_list = pd.read_excel('meals.xlsx', header=0)
+
+#----------------
+inner_join = pd.merge(meal_list,
+                     menu_list,
+                     left_on = 'menuNo',
+                     right_on = 'menuID',
+                     how = 'inner')
+
+inner_join
+
+#----------------

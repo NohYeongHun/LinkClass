@@ -1,0 +1,74 @@
+import pandas
+
+#--------
+pandas.__version__
+
+#--------
+data_dic = {
+    'year':[2018, 2019, 2020],
+    'sales' : [350, 480, 1099]
+}
+data_dic
+
+#--------
+df2 = pd.DataFrame([[89.2, 92.5, 90.8], [92.8, 89.9, 95.2]], index = ['중간고사', '기말고사'], columns = data2[0:3])
+df2
+
+#--------
+data_df = [['20201101', 'Hong', '90', '95'], ['20201102', 'Kim', '93', '94'], ['20201103', 'Lee', '87', '97']]
+
+
+#--------
+y1 = [350, 410, 520, 695]
+y2 = [200, 250, 385, 350]
+x = range(len(y1))
+
+#--------
+plt.title('Quarterly sales')
+plt.xlabel('Quarters') # x축 레이블
+plt.ylabel('sales')
+xLabel = ['first', 'second', 'third', 'fourth'] # 눈금 이름 리스트 생성
+plt.xticks(x, xLabel, fontsize=10) # 바 차트의 x 축 눈금 이름 설정
+plt.legend(['chairs', 'desks']) # 범례 설정
+plt.show()
+
+#--------
+f = open('seoul.csv')
+data = csv.reader(f)
+next(data)
+high = []
+low = []
+
+for row in data :
+    if row[-1] != '' and row[-2] != '' :
+        if 1983 <= int(row[0].split('-')[0]) :
+            if row[0].split('-')[1] == '04' and row[0].split('-')[2] == '01' :
+                high.append(float(row[-1]))
+                low.append(float(row[-2]))
+plt.plot(high, 'hotpink')
+plt.plot(low, 'skyblue')
+plt.show()
+
+#--------
+plt.hist([1,1,2,3,4,5,6,6,7,8,10])
+plt.show()
+
+#--------
+f = open('seoul.csv')
+data = csv.reader(f)
+next(data)
+aug = []
+jan = []
+
+for row in data :
+    month = row[0].split('-')[1]
+    if row[-1] != '' :
+        if month == '08':
+            aug.append(float(row[-1]))
+        if month == '01':
+            jan.append(float(row[-1]))
+
+plt.hist(aug, bins = 100, color = 'r', label = 'Aug')
+plt.hist(jan, bins = 100, color = 'b', label = 'Jan')
+plt.legend()
+plt.show()
