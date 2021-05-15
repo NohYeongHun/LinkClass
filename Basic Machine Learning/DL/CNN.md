@@ -374,3 +374,8 @@ print(
     .format(class_names[np.argmax(score)], 100 * np.max(score))
 )
 ```
+
+
+# Reference
+[Tensorflow-ImageClassification-Tutorial]https://www.tensorflow.org/tutorials/images/classification
+
