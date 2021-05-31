@@ -81,7 +81,7 @@ model.compile(
 )
 ```
 
-## 데이터 스케일링
+## 데이터 전처리
 ```python
 from keras.preprocessing.image import ImageDataGenerator
 
